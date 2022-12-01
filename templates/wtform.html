@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 #action="{{ url_for('wtform') }}"
 {% block content %}
-    <h1>{% block title %}client information makin mumet{% endblock %}</h1>
+    <h1>{% block title %}client information {% endblock %}</h1>
+    <h2>{{apasih}}</h2>
 
         {% if name %}
             <h1>{{name}}</h1>

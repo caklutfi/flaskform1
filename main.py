@@ -4,7 +4,7 @@ from clientform import ClientForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secretkey"
 
-nama = ''
+nama = 'random'
 # making route
 @app.route('/')
 def home():
@@ -19,6 +19,7 @@ def form():
 
 @app.route('/wtform', methods=['GET', 'POST'])
 def wtform():
+    apasih= "apasih"
     name = None
     form = ClientForm()
     if form.validate_on_submit():
@@ -30,7 +31,7 @@ def wtform():
         print(nama)
     if request.method == 'POST':
         return redirect(url_for('home'))
-    return render_template("wtform.html", name=name, form=form)
+    return render_template("wtform.html", name=name, form=form, apasih=apasih)
 
 
 
