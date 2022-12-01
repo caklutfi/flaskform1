@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 #action="{{ url_for('wtform') }}"
 {% block content %}
-    <h1>{% block title %}client information {% endblock %}</h1>
+    <h1>{% block title %}Client information {% endblock %}</h1>
     <h2>{{apasih}}</h2>
 
         {% if name %}
@@ -20,6 +20,23 @@
            {{ form.email.label}}
             {{ form.email(class="form-control") }}
         </div>
+        <div>
+           {{ form.phone.label}}
+            {{ form.phone(class="form-control") }}
+        </div>
+        <div class="col-sm-3">
+           {{ form.date.label}}
+            {{ form.date(class="form-control") }}
+        </div>
+        <div class="col-sm-3">
+           {{ form.time.label}}
+            {{ form.time(class="form-control") }}
+        </div>
+        <div>
+           {{ form.payment.label}}
+            {{ form.payment(class="form-control") }}
+        </div>
+
         <br>
         <div>
             {{ form.submit(class="btn btn-primary") }}
