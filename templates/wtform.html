@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 #action="{{ url_for('wtform') }}"
 {% block content %}
+<div class="container">
     <h1>{% block title %}Client information {% endblock %}</h1>
-    <h2>{{apasih}}</h2>
-
+    <br>
         {% if name %}
             <h1>{{name}}</h1>
         {% else %}
-            <div class="container">
+
     <div class="col-lg-9">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {{ form.csrf_token }}
-        <div class="mt-3">
+        <div>
         <div>
            {{ form.fullname.label}}
             {{ form.fullname(class="form-control") }}
@@ -24,13 +24,17 @@
            {{ form.phone.label}}
             {{ form.phone(class="form-control") }}
         </div>
-        <div class="col-sm-3">
+        <div>
            {{ form.date.label}}
             {{ form.date(class="form-control") }}
         </div>
-        <div class="col-sm-3">
+        <div>
            {{ form.time.label}}
             {{ form.time(class="form-control") }}
+        </div>
+        <div>
+           {{ form.address.label}}
+            {{ form.address(class="form-control") }}
         </div>
         <div>
            {{ form.payment.label}}
@@ -45,9 +49,9 @@
 
     </form>
     </div>
-    </div>
-    {% endif %}
 
+    {% endif %}
+</div>
 
 
 
