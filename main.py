@@ -34,7 +34,8 @@ def wtform():
         date = form.date.data
         time = form.time.data
         file = form.payment.data
-        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'], secure_filename(file.filename)))
+        print(file)
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
         session['user'] = name
         session['email'] = email
         session['address'] = address
