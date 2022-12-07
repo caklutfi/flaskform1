@@ -2,19 +2,25 @@ from flask import Flask, render_template, request, redirect,url_for, session, fl
 from clientform import ClientForm
 from werkzeug.utils import secure_filename
 import os
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+import requests
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip'}
 # Setting up the application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secretkey"
 app.config['UPLOAD_FOLDER'] = 'static'
 
 
+url= 'https://api.npoint.io/e21406b80f9016c674e8'
+response= requests.get(url).json()
+
+
+
 # making route
 @app.route('/')
 def home():
 
-    variabel= ""
-    return render_template('index.html', variabel=variabel)
+    data = response
+    return render_template('index.html', json=data )
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
@@ -34,7 +40,8 @@ def wtform():
         date = form.date.data
         time = form.time.data
         file = form.payment.data
-        print(file)
+        print(type(file))
+        print(file.filename)
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
         session['user'] = name
         session['email'] = email
@@ -42,6 +49,7 @@ def wtform():
         session['phone'] = phone
         session['date'] = date.strftime("%m/%d/%Y")
         session['time'] = time.strftime("%H:%M:%S")
+        session['payment'] = file.filename
         # form.fullname.data = ''
         flash('you are loged in')
         return redirect(url_for('user'))
@@ -56,7 +64,8 @@ def user():
         phone = session['phone']
         date = session['date']
         time = session['time']
-        return render_template('user.html', user=user, email=email, address=address,phone=phone,date=date, time=time)
+        payment = session['payment']
+        return render_template('user.html', user=user,email=email,address=address,phone=phone,date=date,time=time,payment=payment)
     else:
         return redirect(url_for('home'))
 
@@ -64,4 +73,4 @@ def user():
 
 # running application
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='192.168.0.11', port=80, debug=True)

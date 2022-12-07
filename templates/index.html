@@ -3,9 +3,23 @@
 
 
 
-<div class="container"> <h1>Halo {{variabel}}, Selamat datang di website abal abal</h1>
-    <div>
+<div class="container p-3 align-middle">
+    <h1>Halo {{variabel}}, Selamat datang di Seven Seas Visual</h1>
+    <h4 class="text-secondary">Beritahu kami apa yang anda butuhkan</h4>
+
+    <div class="row  p-3">
+        {% for i in json%}
+        <div class="card p-1 m-2 h-50" style="width: 18rem;">
+            <img src="static/{{json[i]['image']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{json[i]['title']}}</h5>
+            <p class="card-text">{{json[i]['content']}}</p>
+            <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
+
 
 {% endblock %}
