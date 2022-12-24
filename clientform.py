@@ -1,6 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, EmailField, DateField, FileField, TimeField, TextAreaField, IntegerField, BooleanField, RadioField, SubmitField)
+from wtforms import (StringField, EmailField, DateField, FileField, PasswordField, TimeField, TextAreaField, IntegerField, BooleanField, RadioField, SubmitField)
 from wtforms.validators import InputRequired, Length
+
+class LoginUser(FlaskForm):
+    username = StringField('Username')
+    password = PasswordField('Password')
+    submit = SubmitField('Login')
+
+class Register(FlaskForm):
+    email = EmailField('Email')
+    username = StringField('Username')
+    password = PasswordField('Password')
+    submit = SubmitField('Register')
+
 
 class ClientForm(FlaskForm):
     fullname = StringField('Name')
